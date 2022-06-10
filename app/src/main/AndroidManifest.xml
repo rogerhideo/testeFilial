@@ -9,7 +9,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TesteSoftSul">
-        <activity android:name=".DisplayMessageActivity"></activity>
+
+        <activity android:name=".CreateUser" android:parentActivityName=".MainActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".EditFilial" android:parentActivityName=".HomeScreen">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".HomeScreen" />
+        </activity>
+
+        <activity android:name=".DetailsFilial" android:parentActivityName=".HomeScreen">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".HomeScreen" />
+        </activity>
+        <activity
+            android:name=".ListFiliais"
+            android:parentActivityName=".HomeScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
+        <activity
+            android:name=".AddFilial"
+            android:parentActivityName=".HomeScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeScreen" />
+        </activity>
+        <activity
+            android:name=".HomeScreen"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
