@@ -57,6 +57,7 @@ public class EditFilial extends AppCompatActivity {
 
             EditText longitudeView = findViewById(R.id.longitude);
             longitudeView.setText(longitude);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
