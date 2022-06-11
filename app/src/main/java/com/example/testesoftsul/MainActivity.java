@@ -5,12 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.button.MaterialButton;
+import com.example.testesoftsul.views.CreateUser;
+import com.example.testesoftsul.views.HomeScreen;
 
 public class MainActivity extends AppCompatActivity {
 //    public static final String EXTRA_MESSAGE = "com.example.testesoftsul.MESSAGE";

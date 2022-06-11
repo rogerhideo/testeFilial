@@ -2,42 +2,54 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.testesoftsul">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TesteSoftSul">
-
-        <activity android:name=".CreateUser" android:parentActivityName=".MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity" />
-        </activity>
-
+        android:theme="@style/Theme.TesteSoftSul"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".HttpClient"></activity>
         <activity
-            android:name=".EditFilial" android:parentActivityName=".HomeScreen">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".HomeScreen" />
-        </activity>
-
-        <activity android:name=".DetailsFilial" android:parentActivityName=".HomeScreen">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".HomeScreen" />
-        </activity>
-        <activity
-            android:name=".ListFiliais"
-            android:parentActivityName=".HomeScreen">
+            android:name=".views.CreateUser"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeScreen" />
+                android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".AddFilial"
-            android:parentActivityName=".HomeScreen">
+            android:name=".views.EditFilial"
+            android:parentActivityName=".views.DetailsFilial">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeScreen" />
+                android:value=".views.DetailsFilial" />
         </activity>
         <activity
-            android:name=".HomeScreen"
+            android:name=".views.DetailsFilial"
+            android:parentActivityName=".views.ListFiliais">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.ListFiliais" />
+        </activity>
+        <activity
+            android:name=".views.ListFiliais"
+            android:parentActivityName=".views.HomeScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.HomeScreen" />
+        </activity>
+        <activity
+            android:name=".views.AddFilial"
+            android:parentActivityName=".views.HomeScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.HomeScreen" />
+        </activity>
+        <activity
+            android:name=".views.HomeScreen"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

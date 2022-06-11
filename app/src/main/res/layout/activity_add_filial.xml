@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddFilial">
-
+    tools:context=".views.AddFilial">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         android:padding="20dp"
         android:textStyle="bold"
         android:textSize="35dp"
-        android:text="TextView"
+        android:text="Adicionar Filial"
         android:gravity="center"
     />
 
@@ -57,7 +56,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/latititude"
+        android:id="@+id/latitude"
         android:layout_below="@id/cidade"
         android:background="#70EDEDED"
         android:hint="Latitude"
@@ -75,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/longitude"
-        android:layout_below="@id/latititude"
+        android:layout_below="@id/latitude"
         android:background="#70EDEDED"
         android:hint="Longitude"
         android:textColorHint="@color/black"
@@ -100,5 +99,6 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
+        android:onClick="onClickCria"
         android:text="Create Filial"/>
 </RelativeLayout>
