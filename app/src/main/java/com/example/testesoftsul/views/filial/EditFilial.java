@@ -69,20 +69,32 @@ public class EditFilial extends AppCompatActivity {
     }
 
     public void onClickCriar( View view ) {
+        try {
+            EditText nomeView = findViewById(R.id.nome);
+            EditText cidadeView = findViewById(R.id.cidade);
+            EditText latitudeView = findViewById(R.id.latitude);
+            EditText longitudeView = findViewById(R.id.longitude);
+
+            String nome = nomeView.getText().toString().trim();
+            String cidade = cidadeView.getText().toString().trim();
+            String latitude = latitudeView.getText().toString().trim();
+            String longitude = longitudeView.getText().toString().trim();
+
+            if ( nome.isEmpty() || cidade.isEmpty() || latitude.isEmpty() || longitude.isEmpty()) {
+                Toast.makeText(getApplicationContext(),"Prencha Todos os campos",Toast.LENGTH_SHORT).show();
+                throw new IOException("Formulário inválido");
+            }
+
         Executor myExecutor = Executors.newSingleThreadExecutor();
         myExecutor.execute(() -> {
             try {
                 Looper.prepare();
-                EditText nomeView = findViewById(R.id.nome);
-                EditText cidadeView = findViewById(R.id.cidade);
-                EditText latitudeView = findViewById(R.id.latitude);
-                EditText longitudeView = findViewById(R.id.longitude);
 
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("nome", nomeView.getText());
-                jsonObject.put("cidade", cidadeView.getText());
-                jsonObject.put("latitude", latitudeView.getText());
-                jsonObject.put("longitude", longitudeView.getText());
+                jsonObject.put("nome", nome);
+                jsonObject.put("cidade", cidade);
+                jsonObject.put("latitude", latitude);
+                jsonObject.put("longitude", longitude);
 
                 RequestBody body = create(
                         MediaType.get("application/json; charset=utf-8"),
@@ -126,10 +138,10 @@ public class EditFilial extends AppCompatActivity {
                     responseBody.close();
                 }
 
-                selectedFilial.setNome(nomeView.getText().toString());
-                selectedFilial.setCidade(cidadeView.getText().toString());
-                selectedFilial.setLatitude(latitudeView.getText().toString());
-                selectedFilial.setLongitude(longitudeView.getText().toString());
+                selectedFilial.setNome(nome);
+                selectedFilial.setCidade(cidade);
+                selectedFilial.setLatitude(latitude);
+                selectedFilial.setLongitude(longitude);
 
                 ArrayList<Filial> filiaisList = ListFiliais.getFiliaisList();
                 ArrayList<Filial> auxArray = new ArrayList<Filial>();
@@ -147,8 +159,11 @@ public class EditFilial extends AppCompatActivity {
                 startActivity(showDetail);
                 Looper.loop();
             } catch (Exception e) {
-                Log.e("testeSoftSul:::", e + " EditFilial->onClickCriar()");
+                Log.e("testeSoftSul:::", e + " EditFilial.myExecutor.execute(()");
             }
         });
+        } catch (Exception e ){
+            Log.e("testeSoftSul:::", e + " EditFilial.onClickCriar()");
+        }
     }
 }

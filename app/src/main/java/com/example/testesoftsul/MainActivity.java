@@ -45,16 +45,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void login( View view ) {
         try {
+            EditText emailView = findViewById(R.id.email);
+            EditText passwordView = findViewById(R.id.password);
+            String email = emailView.getText().toString().trim();
+            String password = passwordView.getText().toString().trim();
+
+            if ( email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(getApplicationContext(),"Prencha Todos os campos",Toast.LENGTH_SHORT).show();
+                throw new IOException("Formulário inválido");
+            }
+
             Executor myExecutor = Executors.newSingleThreadExecutor();
             myExecutor.execute(() -> {
                 try {
                     Looper.prepare();
-                    EditText emailView = findViewById(R.id.email);
-                    EditText passwordView = findViewById(R.id.password);
-
                     JSONObject jsonObject = new JSONObject();
-//                    jsonObject.put("email", emailView.getText());
-//                    jsonObject.put("password", passwordView.getText());
+//                    jsonObject.put("email", email);
+//                    jsonObject.put("password", password);
 
                     jsonObject.put("email", "roger_hideo@hotmail.com");
                     jsonObject.put("password", "1234556");
