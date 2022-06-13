@@ -18,6 +18,10 @@ Esse mesmo host utilizado no servidor deve ser adicionado ao arquivo desse proje
 
 ``` java  private static String serverHost = "http://192.168.100.76:3000";```
 
+> É muito importante que esse endereço IP seja da máquina que está rodando o projeto
+
+
+
 Então você pode executar o aplicativo pelo Android Studio em um dispositivo emulado.
 
 
