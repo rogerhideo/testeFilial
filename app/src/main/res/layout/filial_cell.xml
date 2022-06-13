@@ -3,7 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:background="@color/design_default_color_primary">
+    android:background="@color/white">
 
 
     <LinearLayout
@@ -15,18 +15,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="20dp"
-            android:paddingVertical="40dp"
-            android:id="@+id/id"
-            android:gravity="left"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
             android:padding="40dp"
             android:id="@+id/nome"
             android:gravity="center"
@@ -37,7 +27,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="40dp"
             android:paddingVertical="40dp"
             android:id="@+id/cidade"
             android:gravity="right"

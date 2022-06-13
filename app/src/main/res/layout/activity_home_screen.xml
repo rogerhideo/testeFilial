@@ -18,10 +18,9 @@
         android:padding="20dp"
         android:textStyle="bold"
         android:textSize="35dp"
-        android:text="TextView"
+        android:text="Bem vindo!"
         android:gravity="center"
         />
-
 
     <Button
         android:id="@+id/buttonAdicionar"
@@ -36,7 +35,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:onClick="filterActivity"
-        android:text="Adicionar"
+        android:text="Adicionar Filial"
     />
 
     <Button
@@ -52,38 +51,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:onClick="filterActivity"
-        android:text="Listar"
+        android:text="Listar Filiais"
     />
-<!--    <Button-->
-<!--        android:id="@+id/buttonDetalhes"-->
-<!--        android:layout_below="@id/buttonListar"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:onClick="filterActivity"-->
-<!--        android:text="Detalhes"-->
-<!--    />-->
-<!--    <Button-->
-<!--        android:id="@+id/buttonEditar"-->
-<!--        android:layout_below="@id/buttonDetalhes"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginStart="20dp"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_marginBottom="20dp"-->
-<!--        android:onClick="filterActivity"-->
-<!--        android:text="Editar"-->
-<!--    />-->
-    <!--    android:layout_below="@id/loginButton"-->
-    <!--        android:onClick="sendMessage"-->
+    
 </RelativeLayout>

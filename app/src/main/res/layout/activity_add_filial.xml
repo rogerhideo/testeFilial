@@ -16,7 +16,7 @@
         android:layout_marginHorizontal="20dp"
         android:padding="20dp"
         android:textStyle="bold"
-        android:textSize="35dp"
+        android:textSize="20dp"
         android:text="Adicionar Filial"
         android:gravity="center"
     />
@@ -67,7 +67,6 @@
         android:padding="20dp"
         android:drawableLeft="@drawable/ic_baseline_location_on_24"
         android:drawablePadding="20dp"
-        android:inputType="number"
         />
 
     <EditText
@@ -84,7 +83,6 @@
         android:padding="20dp"
         android:drawableLeft="@drawable/ic_baseline_location_on_24"
         android:drawablePadding="20dp"
-        android:inputType="number"
         />
 
     <Button
@@ -100,5 +98,5 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         android:onClick="onClickCriar"
-        android:text="Create Filial"/>
+        android:text="Criar Filial"/>
 </RelativeLayout>

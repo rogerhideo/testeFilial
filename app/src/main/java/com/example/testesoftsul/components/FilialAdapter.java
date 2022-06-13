@@ -32,11 +32,9 @@ public class FilialAdapter extends ArrayAdapter<Filial>  {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.filial_cell, parent, false);
             }
 
-            TextView id = (TextView) convertView.findViewById(R.id.id);
             TextView nome = (TextView) convertView.findViewById(R.id.nome);
             TextView cidade = (TextView) convertView.findViewById(R.id.cidade);
 
-            id.setText(String.valueOf(filial.getId()));
             nome.setText(filial.getNome());
             cidade.setText(filial.getCidade());
         } catch (Exception e) {

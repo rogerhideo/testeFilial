@@ -31,6 +31,11 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        System.out.println("homescreen");
+        System.out.println("token -> " + AppConfig.getAccessToken(getApplicationContext()));
+        System.out.println("user -> " + AppConfig.getUserId(getApplicationContext()));
+
     }
 
     public void filterActivity( View view ) {

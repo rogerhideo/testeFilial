@@ -1,6 +1,8 @@
 package com.example.testesoftsul.config;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class AppConfig {
 
@@ -11,6 +13,8 @@ public class AppConfig {
     private static String createFilialEnndPoint = "api/filial";
     private static String updateFilialEndPoint = "api/filial/";
     private static String deleteFilialEndPoint = "api/filial/";
+    private static String userId = new String();
+    private static String accessToken = new String();
 
     public static String getServerHost( ) {
         return serverHost;
@@ -48,4 +52,67 @@ public class AppConfig {
         return deleteFilialEndPoint;
     }
     public static void setDeleteFilialEndPoint(String endpoint) { deleteFilialEndPoint = endpoint; }
+
+    public static String getUserId(Context context) {
+        try {
+            if (AppConfig.userId == null) {
+                SharedPreferences sharedPreferences = context.getSharedPreferences(
+                        "userId",
+                        Context.MODE_PRIVATE
+                );
+                AppConfig.userId = sharedPreferences.getString("userId", null);
+            }
+        } catch (Exception e) {
+            Log.e( "testeFilial::","AppConfig.getUserId()" +  e);
+        }
+
+        return AppConfig.userId;
+    }
+
+    public static void setUserId(String userId, Context context) {
+        AppConfig.userId = userId;
+
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(
+                    "userId",
+                    Context.MODE_PRIVATE
+            );
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("userId", userId);
+            editor.apply();
+        } catch (Exception e) {
+            Log.e( "testeFilial::","AppConfig.setUserId()" +  e);
+        }
+    }
+
+    public static String getAccessToken(Context context) {
+        try {
+            if (AppConfig.accessToken == null) {
+                SharedPreferences sharedPreferences = context.getSharedPreferences(
+                        "accessToken",
+                        Context.MODE_PRIVATE
+                );
+                AppConfig.accessToken = sharedPreferences.getString("accessToken", null);
+            }
+        } catch (Exception e) {
+            Log.e( "testeFilial::","AppConfig.getAccessToken()" +  e);
+        }
+
+        return AppConfig.accessToken;
+    }
+
+    public static void setAccessToken(String accessToken, Context context) {
+        AppConfig.accessToken = accessToken;
+        try {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(
+                    "accessToken",
+                    Context.MODE_PRIVATE
+            );
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("accessToken", accessToken);
+            editor.apply();
+        } catch (Exception e) {
+            Log.e( "testeFilial::","AppConfig.setAccessToken()" +  e);
+        }
+    }
 }

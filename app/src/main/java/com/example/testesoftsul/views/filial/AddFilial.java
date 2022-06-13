@@ -2,11 +2,14 @@ package com.example.testesoftsul.views.filial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.testesoftsul.MainActivity;
 import com.example.testesoftsul.R;
@@ -42,6 +45,7 @@ public class AddFilial extends AppCompatActivity {
         Executor myExecutor = Executors.newSingleThreadExecutor();
         myExecutor.execute(() -> {
             try {
+                Looper.prepare();
                 EditText nomeView = findViewById(R.id.nome);
                 EditText cidadeView = findViewById(R.id.cidade);
                 EditText latitudeView = findViewById(R.id.latitude);
@@ -52,6 +56,7 @@ public class AddFilial extends AppCompatActivity {
                 jsonObject.put("cidade", cidadeView.getText());
                 jsonObject.put("latitude", latitudeView.getText());
                 jsonObject.put("longitude", longitudeView.getText());
+                jsonObject.put("user_id", AppConfig.getUserId(getApplicationContext()));
 
                 RequestBody body = create(
                         MediaType.get("application/json; charset=utf-8"),
@@ -79,16 +84,22 @@ public class AddFilial extends AppCompatActivity {
                     responseBody.close();
                 }
 
-
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
                 if ( !response.isSuccessful() ) {
-                    System.out.println("responseee -> " );
+                    CharSequence text = "Falha ao criar Filial!";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                     throw new IOException("http response is not successful");
                 } else {
-                    System.out.println("responseee -> " );
+                    CharSequence text = "Filial criada com sucesso!";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show() ;
                 }
 
                 Intent intent = new Intent(this, HomeScreen.class);
                 startActivity(intent);
+                Looper.loop();
             } catch ( Exception e ) {
                 Log.e("testeSoftSul:::", e + " AddFilial->onCreate()");
             }

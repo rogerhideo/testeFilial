@@ -2,11 +2,14 @@ package com.example.testesoftsul.views.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.testesoftsul.MainActivity;
 import com.example.testesoftsul.R;
@@ -42,6 +45,7 @@ public class CreateUser extends AppCompatActivity {
         Executor myExecutor = Executors.newSingleThreadExecutor();
         myExecutor.execute(() -> {
             try {
+                Looper.prepare();
                 EditText nomeView = findViewById(R.id.nome);
                 EditText emailView = findViewById(R.id.email);
                 EditText senhaView = findViewById(R.id.senha);
@@ -77,15 +81,23 @@ public class CreateUser extends AppCompatActivity {
                     responseBody.close();
                 }
 
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+
                 if ( !response.isSuccessful() ){
-                    System.out.println("createUSer  FAILUREE-> " );
+                    CharSequence text = "Falha ao criar usuário!";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show() ;
                     throw new IOException("http response is not successful");
                 } else {
-                    System.out.println("createUSer SUCESS -> " );
+                    CharSequence text = "Usuário Criado com Sucesso!";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show() ;
                 }
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+                Looper.loop();
             } catch (Exception e) {
                 Log.e("testeSoftSul:::", e + " CreateUser->onClickCriar()");
             }

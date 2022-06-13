@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/signin"
-        android:text="Sign in"
+        android:text="Log in"
         android:textColor="@color/black"
         android:textSize="35dp"
         android:textStyle="bold"
@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_below="@id/signin"
         android:background="#70EDEDED"
         android:hint="Username"
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/password"
-        android:layout_below="@id/username"
+        android:layout_below="@id/email"
         android:background="#70EDEDED"
         android:hint="Password"
         android:textColorHint="@color/black"
@@ -58,39 +58,23 @@
         android:id="@+id/loginButton"
         android:layout_below="@id/password"
         android:text="LOGIN"
-        android:backgroundTint="@color/design_default_color_secondary"
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
+        android:onClick="login"
     />
-
-    <Button
-        android:id="@+id/loginButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:onClick="sendMessage"
-        android:text="@string/loginButton2"/>
 
     <Button
         android:id="@+id/createUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/loginButton2"
+        android:layout_below="@id/loginButton"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:gravity="bottom"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
         android:onClick="createUser"
-        android:text="Create"/>
-    <!--        android:backgroundTint="@color/design_default_color_secondary"-->
+        android:text="Criar Usuário"/>
 </RelativeLayout>

@@ -2,11 +2,14 @@ package com.example.testesoftsul.views.filial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.testesoftsul.R;
 import com.example.testesoftsul.config.AppConfig;
@@ -69,6 +72,7 @@ public class EditFilial extends AppCompatActivity {
         Executor myExecutor = Executors.newSingleThreadExecutor();
         myExecutor.execute(() -> {
             try {
+                Looper.prepare();
                 EditText nomeView = findViewById(R.id.nome);
                 EditText cidadeView = findViewById(R.id.cidade);
                 EditText latitudeView = findViewById(R.id.latitude);
@@ -104,14 +108,16 @@ public class EditFilial extends AppCompatActivity {
                 Call call = client.newCall(request);
                 Response response = call.execute();
 
-
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
                 if ( response.isSuccessful() ){
-                    System.out.println("Edit Filial SUCESS -> " );
-                    Log.d("testeSoftSul::", "EditFilial.onClickCriar() Salvo com Sucesso!");
-//                    Toast.makeText(this, "SALVO COM SUCESSO", Toast.LENGTH_SHORT).show();
+                    CharSequence text = "Filial Editada com Sucesso!";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 } else {
-                    System.out.println("Edit Filial  FAILUREE-> " );
-//                    Toast.makeText(this,"ERRO AO SALVAR",Toast.LENGTH_SHORT).show();
+                    CharSequence text = "Falha salvar edição!";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                     throw new IOException("http response is not successful");
                 }
 
@@ -139,6 +145,7 @@ public class EditFilial extends AppCompatActivity {
                 Intent showDetail = new Intent(getApplicationContext(), DetailsFilial.class);
                 showDetail.putExtra("id", String.valueOf(selectedFilial.getId()));
                 startActivity(showDetail);
+                Looper.loop();
             } catch (Exception e) {
                 Log.e("testeSoftSul:::", e + " EditFilial->onClickCriar()");
             }
