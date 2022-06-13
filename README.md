@@ -12,7 +12,7 @@ E então rode o servidos com
     $php artisan serve --host=192.168.100.76:3000
     
 Esse mesmo host utilizado no servidor deve ser adicionado ao arquivo desse projeto android:
-  app/src/main/java/com/example/testesoftsul/config/AppConfig.java
+  app/src/main/java/com/example/testefilial/config/AppConfig.java
   
   Deve ser adicionado na linha 9: Subtituindo o já existente
 
