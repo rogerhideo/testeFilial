@@ -31,11 +31,6 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
-        System.out.println("homescreen");
-        System.out.println("token -> " + AppConfig.getAccessToken(getApplicationContext()));
-        System.out.println("user -> " + AppConfig.getUserId(getApplicationContext()));
-
     }
 
     public void filterActivity( View view ) {
@@ -47,12 +42,6 @@ public class HomeScreen extends AppCompatActivity {
                 case ( R.id.buttonListar):
                     redirectToActivity(ListFiliais.class);
                     break;
-//                case ( R.id.buttonDetalhes):
-//                    redirectToActivity(DetailsFilia2l.class);
-//                    break;
-//                case ( R.id.buttonEditar ):
-//                    redirectToActivity(EditFilial.class);
-//                    break;
             }
         } catch ( Exception e ) {
             Log.e("testeSoftSul:::" , "HomeScreen->filterActivity()");
@@ -66,7 +55,6 @@ public class HomeScreen extends AppCompatActivity {
                 try {
                     String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getGetFiliaisEndPoint() + "1";
 
-                    System.out.println("Homescreen -> endpoind -> " + endPoint);
                     Request request = new Request.Builder()
                             .url(endPoint)
                             .get()
@@ -88,10 +76,7 @@ public class HomeScreen extends AppCompatActivity {
                     }
 
                     if ( !response.isSuccessful()){
-                        System.out.println("createUSer  FAILUREE-> " );
                         throw new IOException("http response is not successful");
-                    } else {
-                        System.out.println("createUSer SUCESS -> " );
                     }
 
                     Intent intent = new Intent(this, classToGo);

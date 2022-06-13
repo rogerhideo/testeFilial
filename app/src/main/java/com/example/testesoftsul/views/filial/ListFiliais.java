@@ -81,7 +81,6 @@ public class ListFiliais extends AppCompatActivity {
         try {
             Intent intent = getIntent();
             String message = intent.getStringExtra(MainActivity.DATA);
-            System.out.println("setup data " + message);
             if ( message != null && !message.equals(jsonData) )  {
                 jsonData = message;
                 JSONObject Jobject = new JSONObject(message);
@@ -156,12 +155,8 @@ public class ListFiliais extends AppCompatActivity {
 
                     Call call = client.newCall(request);
                     Response response = call.execute();
-                    System.out.println(" list Filiais responseee -> " + response.body().string());
-
-
 
                     if ( response.isSuccessful() ){
-                        System.out.println("list Filial SUCESS -> " );
                         String responseString = response.body().string();
                         JSONArray Jarray = new JSONArray(responseString);
                         filiaisList = new ArrayList<Filial>();
@@ -177,7 +172,6 @@ public class ListFiliais extends AppCompatActivity {
                             filiaisList.add(newFilial);
                         }
                     } else {
-                        System.out.println("list Filial  FAILUREE-> " );
                         throw new IOException("http response is not successful");
                     }
 

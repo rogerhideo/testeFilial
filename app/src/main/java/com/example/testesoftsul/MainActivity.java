@@ -59,12 +59,10 @@ public class MainActivity extends AppCompatActivity {
             myExecutor.execute(() -> {
                 try {
                     Looper.prepare();
-                    JSONObject jsonObject = new JSONObject();
-//                    jsonObject.put("email", email);
-//                    jsonObject.put("password", password);
 
-                    jsonObject.put("email", "roger_hideo@hotmail.com");
-                    jsonObject.put("password", "1234556");
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("email", emailView.getText().toString());
+                    jsonObject.put("password", passwordView.getText().toString());
 
                     RequestBody body = create(
                             MediaType.get("application/json; charset=utf-8"),
@@ -72,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     );
 
                     String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getLoginEndpoint();
-                    System.out.println("mainAcitivy -> endpoind -> " + endPoint);
                     Request request = new Request.Builder()
                             .url(endPoint)
                             .post(body)
@@ -87,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
                     Response response = call.execute();
 
                     String jsonData = response.body().string();
-                    System.out.println(jsonData);
-
 
                     JSONObject jsonResponse = new JSONObject(jsonData);
                     JSONObject object = jsonResponse.getJSONObject("data");
@@ -108,19 +103,22 @@ public class MainActivity extends AppCompatActivity {
                         CharSequence text = "Falha ao logar!";
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-                        System.out.println("mainAcitivy  FAILUREE-> " );
                         throw new IOException("http response is not successful");
                     } else {
                         CharSequence text = "Login com sucesso!";
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-                        System.out.println("mainAcitivy SUCESS -> " );
                     }
 
                     Intent intent = new Intent(this, HomeScreen.class);
                     startActivity(intent);
                     Looper.loop();
                 } catch (Exception e) {
+                    Context context = getApplicationContext();
+                    int duration = Toast.LENGTH_SHORT;
+                    CharSequence text = "login ou senha incorretos!";
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                     Log.e("testeSoftSul:::", e + " MainActivity.myExecutor.execute(()");
                 }
             });

@@ -104,13 +104,13 @@ public class EditFilial extends AppCompatActivity {
                 String endPoint = AppConfig.getServerHost() + "/"
                                     + AppConfig.getUpdateFilialEndPoint()
                                     +  selectedFilial.getId();
-                System.out.println("editFilial endpoint -> " + endPoint);
-
+                String accesToken = "Bearer " + AppConfig.getAccessToken(getApplicationContext());
 
                 Request request = new Request.Builder()
                         .url(endPoint)
                         .put(body)
                         .addHeader("Accept-Encoding", "gzip")
+                        .addHeader("Authorization", accesToken)
                         .build();
 
                 OkHttpClient client = new OkHttpClient.Builder()

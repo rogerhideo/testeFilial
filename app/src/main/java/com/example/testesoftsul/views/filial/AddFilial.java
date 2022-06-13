@@ -75,11 +75,13 @@ public class AddFilial extends AppCompatActivity {
                 );
 
                 String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getCreateFilialEnndPoint();
+                String accesToken = "Bearer " + AppConfig.getAccessToken(getApplicationContext());
 
                 Request request = new Request.Builder()
                         .url(endPoint)
                         .post(body)
                         .addHeader("Accept-Encoding", "gzip")
+                        .addHeader("Authorization", accesToken)
                         .build();
 
                 OkHttpClient client = new OkHttpClient.Builder()
@@ -88,7 +90,6 @@ public class AddFilial extends AppCompatActivity {
 
                 Call call = client.newCall(request);
                 Response response = call.execute();
-                System.out.println("responseee -> " + response.body().string());
 
                 final ResponseBody responseBody = response.body();
                 if ( responseBody != null ) {

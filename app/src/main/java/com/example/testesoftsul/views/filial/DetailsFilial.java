@@ -106,11 +106,13 @@ public class DetailsFilial extends AppCompatActivity {
                 try {
                     Looper.prepare();
                     String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getDeleteFilialEndPoint() + selectedFilial.getId();
+                    String accesToken = "Bearer " + AppConfig.getAccessToken(getApplicationContext());
 
                     Request request = new Request.Builder()
                             .url(endPoint)
                             .delete()
                             .addHeader("Accept-Encoding", "gzip")
+                            .addHeader("Authorization", accesToken)
                             .build();
 
                     OkHttpClient client = new OkHttpClient.Builder()
