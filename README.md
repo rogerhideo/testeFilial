@@ -21,3 +21,7 @@ Esse mesmo host utilizado no servidor deve ser adicionado ao arquivo desse proje
 Então você pode executar o aplicativo pelo Android Studio em um dispositivo emulado.
 
 
+Bibliotecas usadas de Terceiros:
+    "com.squareup.okhttp3:okhttp-bom:4.9.0"
+    "com.squareup.okhttp3:okhttp"
+    "com.squareup.okhttp3:logging-interceptor"
