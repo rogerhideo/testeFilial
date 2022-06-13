@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.filial.AddFilial">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#70EDEDED"
+        android:id="@+id/textView"
+        android:textColor="@color/black"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="20dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:text="Adicionar Filial"
+        android:gravity="center"
+    />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nome"
+        android:layout_below="@id/textView"
+        android:background="#70EDEDED"
+        android:hint="Nome da Filial"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_home_work_24"
+        android:drawablePadding="20dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cidade"
+        android:layout_below="@id/nome"
+        android:background="#70EDEDED"
+        android:hint="Cidade"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_language_24"
+        android:drawablePadding="20dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitude"
+        android:layout_below="@id/cidade"
+        android:background="#70EDEDED"
+        android:hint="Latitude"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+        android:drawablePadding="20dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitude"
+        android:layout_below="@id/latitude"
+        android:background="#70EDEDED"
+        android:hint="Longitude"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/ic_baseline_location_on_24"
+        android:drawablePadding="20dp"
+        />
+
+    <Button
+        android:id="@+id/createFilialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/longitude"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="onClickCriar"
+        android:text="Criar Filial"/>
+</RelativeLayout>

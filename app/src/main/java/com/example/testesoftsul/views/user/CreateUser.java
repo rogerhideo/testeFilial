@@ -1,4 +1,4 @@
-package com.example.testesoftsul;
+package com.example.testesoftsul.views.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,21 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.testesoftsul.MainActivity;
+import com.example.testesoftsul.R;
 import com.example.testesoftsul.config.AppConfig;
-import com.example.testesoftsul.models.Filial;
-import com.example.testesoftsul.views.user.CreateUser;
-import com.example.testesoftsul.views.HomeScreen;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -34,23 +34,36 @@ import okhttp3.ResponseBody;
 
 import static okhttp3.RequestBody.create;
 
-public class MainActivity extends AppCompatActivity {
-    public static final String DATA = "com.example.testesoftsul.DATA";
+public class CreateUser extends AppCompatActivity {
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_create_user);
     }
 
-    public void login( View view ) {
-        try {
-            EditText emailView = findViewById(R.id.email);
-            EditText passwordView = findViewById(R.id.password);
-            String email = emailView.getText().toString().trim();
-            String password = passwordView.getText().toString().trim();
 
-            if ( email.isEmpty() || password.isEmpty()) {
+    public void onClickCriar( View view ) {
+        try {
+            EditText nomeView = findViewById(R.id.nome);
+            EditText emailView = findViewById(R.id.email);
+            EditText senhaView = findViewById(R.id.senha);
+            String nome = nomeView.getText().toString().trim();
+            String senha = nomeView.getText().toString().trim();
+
+            EditText emailValidate = (EditText)findViewById(R.id.email);
+            String email = emailValidate.getText().toString().trim();
+            String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+            if ( email.matches(emailPattern) && email.length() > 0) {
+                Log.d("testeFilial::", "Email válido");
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"Email inválido",Toast.LENGTH_SHORT).show();
+                throw new IOException("Email inválido");
+            }
+
+            if ( nome.isEmpty() || senha.isEmpty()) {
                 Toast.makeText(getApplicationContext(),"Prencha Todos os campos",Toast.LENGTH_SHORT).show();
                 throw new IOException("Formulário inválido");
             }
@@ -60,20 +73,24 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Looper.prepare();
 
+
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("email", emailView.getText().toString());
-                    jsonObject.put("password", passwordView.getText().toString());
+                    jsonObject.put("name", nomeView.getText());
+                    jsonObject.put("email", emailView.getText());
+                    jsonObject.put("password", senhaView.getText());
 
                     RequestBody body = create(
                             MediaType.get("application/json; charset=utf-8"),
                             jsonObject.toString()
                     );
 
-                    String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getLoginEndpoint();
+                    String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getCreateUserEndPoint();
+                    String accesToken = "Bearer " + AppConfig.getAccessToken(getApplicationContext());
                     Request request = new Request.Builder()
                             .url(endPoint)
                             .post(body)
                             .addHeader("Accept-Encoding", "gzip")
+                            .addHeader("Authorization", accesToken)
                             .build();
 
                     OkHttpClient client = new OkHttpClient.Builder()
@@ -83,57 +100,34 @@ public class MainActivity extends AppCompatActivity {
                     Call call = client.newCall(request);
                     Response response = call.execute();
 
-                    String jsonData = response.body().string();
-
-                    JSONObject jsonResponse = new JSONObject(jsonData);
-                    JSONObject object = jsonResponse.getJSONObject("data");
-
-                    AppConfig.setAccessToken(object.getString("token"), getApplicationContext());
-                    AppConfig.setUserId(String.valueOf(object.getInt("userId")), getApplicationContext());
-
                     final ResponseBody responseBody = response.body();
                     if (responseBody != null) {
                         responseBody.close();
                     }
 
-
                     Context context = getApplicationContext();
                     int duration = Toast.LENGTH_SHORT;
-                    if ( !response.isSuccessful()){
-                        CharSequence text = "Falha ao logar!";
+
+                    if (!response.isSuccessful()) {
+                        CharSequence text = "Falha ao criar usuário!";
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                         throw new IOException("http response is not successful");
                     } else {
-                        CharSequence text = "Login com sucesso!";
+                        CharSequence text = "Usuário Criado com Sucesso!";
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
                     }
 
-                    Intent intent = new Intent(this, HomeScreen.class);
+                    Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
                     Looper.loop();
                 } catch (Exception e) {
-                    Context context = getApplicationContext();
-                    int duration = Toast.LENGTH_SHORT;
-                    CharSequence text = "login ou senha incorretos!";
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                    Log.e("testeSoftSul:::", e + " MainActivity.myExecutor.execute(()");
+                    Log.e("testeSoftSul:::", e + " CreateUser->myExecutor.execute(()");
                 }
             });
         } catch (Exception e) {
-            Log.e("testeSoftSul:::" , "MainActivity.redirectToActivity()");
+            Log.e("testeSoftSul:::", e + " CreateUser->onClickCriar()");
         }
-    }
-
-    public void sendMessage( View view ) {
-            Intent intent = new Intent(this, HomeScreen.class);
-            startActivity(intent);
-    }
-
-    public void createUser( View view ) {
-        Intent intent = new Intent(this, CreateUser.class);
-        startActivity(intent);
     }
 }

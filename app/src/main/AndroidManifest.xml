@@ -2,14 +2,52 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.testesoftsul">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TesteSoftSul">
-        <activity android:name=".DisplayMessageActivity"></activity>
+        android:theme="@style/Theme.TesteSoftSul"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".views.filial.DetailsFilial"
+            android:parentActivityName=".views.filial.ListFiliais">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.filial.ListFiliais" />
+        </activity>
+        <activity
+            android:name=".views.filial.ListFiliais"
+            android:parentActivityName=".views.HomeScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.HomeScreen" />
+        </activity>
+        <activity
+            android:name=".views.user.CreateUser"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".views.filial.EditFilial"
+            android:parentActivityName=".views.filial.DetailsFilial">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.filial.DetailsFilial" />
+        </activity>
+        <activity
+            android:name=".views.filial.AddFilial"
+            android:parentActivityName=".views.HomeScreen">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.HomeScreen" />
+        </activity>
+        <activity android:name=".views.HomeScreen"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
