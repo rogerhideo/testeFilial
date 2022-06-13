@@ -1,4 +1,4 @@
-package com.example.testesoftsul.config;
+package com.example.testefilial.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,7 @@ import android.util.Log;
 
 public class AppConfig {
 
-    private static String serverHost = "http://192.168.100.76:3001";
+    private static String serverHost = "http://192.168.100.76:3002";
     private static String createUserEndPoint =  "api/auth/register";
     private static String loginEndpoint = "api/auth/login";
     private static String getFiliaisEndPoint = "api/filiais/";

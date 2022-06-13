@@ -1,4 +1,4 @@
-package com.example.testesoftsul.views.filial;
+package com.example.testefilial.views.filial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.testesoftsul.MainActivity;
-import com.example.testesoftsul.R;
-import com.example.testesoftsul.config.AppConfig;
-import com.example.testesoftsul.views.HomeScreen;
+import com.example.testefilial.MainActivity;
+import com.example.testefilial.R;
+import com.example.testefilial.config.AppConfig;
+import com.example.testefilial.views.HomeScreen;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,11 +113,11 @@ public class AddFilial extends AppCompatActivity {
                 startActivity(intent);
                 Looper.loop();
             } catch ( Exception e ) {
-                Log.e("testeSoftSul:::", e + " AddFilial->myExecutor.execute(()");
+                Log.e("testeFilial:::", e + " AddFilial->myExecutor.execute(()");
             }
         });
         } catch (Exception e) {
-            Log.e("testeSoftSul:::", e + " AddFilial->onCreate()");
+            Log.e("testeFilial:::", e + " AddFilial->onCreate()");
         }
     }
 }

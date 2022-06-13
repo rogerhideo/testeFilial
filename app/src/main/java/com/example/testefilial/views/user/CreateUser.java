@@ -1,4 +1,4 @@
-package com.example.testesoftsul.views.user;
+package com.example.testefilial.views.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,9 +13,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.testesoftsul.MainActivity;
-import com.example.testesoftsul.R;
-import com.example.testesoftsul.config.AppConfig;
+import com.example.testefilial.MainActivity;
+import com.example.testefilial.R;
+import com.example.testefilial.config.AppConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -123,11 +123,11 @@ public class CreateUser extends AppCompatActivity {
                     startActivity(intent);
                     Looper.loop();
                 } catch (Exception e) {
-                    Log.e("testeSoftSul:::", e + " CreateUser->myExecutor.execute(()");
+                    Log.e("testeFilial:::", e + " CreateUser->myExecutor.execute(()");
                 }
             });
         } catch (Exception e) {
-            Log.e("testeSoftSul:::", e + " CreateUser->onClickCriar()");
+            Log.e("testeFilial:::", e + " CreateUser->onClickCriar()");
         }
     }
 }
