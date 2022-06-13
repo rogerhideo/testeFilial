@@ -1,13 +1,17 @@
-package com.example.testesoftsul.views;
+package com.example.testesoftsul.views.filial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.testesoftsul.MainActivity;
 import com.example.testesoftsul.R;
+import com.example.testesoftsul.config.AppConfig;
+import com.example.testesoftsul.views.HomeScreen;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,14 +38,10 @@ public class AddFilial extends AppCompatActivity {
         setContentView(R.layout.activity_add_filial);
     }
 
-    public void onClickCria(View view) throws JSONException, IOException {
-
-//        HttpClient2.post("http://192.168.100.19:3000/mobile/v2/abastecimentos/1", jsonObject);
+    public void onClickCriar( View view ) {
         Executor myExecutor = Executors.newSingleThreadExecutor();
         myExecutor.execute(() -> {
             try {
-                System.out.println("onClickCria -> ");
-
                 EditText nomeView = findViewById(R.id.nome);
                 EditText cidadeView = findViewById(R.id.cidade);
                 EditText latitudeView = findViewById(R.id.latitude);
@@ -57,8 +57,11 @@ public class AddFilial extends AppCompatActivity {
                         MediaType.get("application/json; charset=utf-8"),
                         jsonObject.toString()
                 );
+
+                String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getCreateFilialEnndPoint();
+
                 Request request = new Request.Builder()
-                        .url("http://192.168.100.76:3000/mobile/v2/abastecimentos/1")
+                        .url(endPoint)
                         .post(body)
                         .addHeader("Accept-Encoding", "gzip")
                         .build();
@@ -69,23 +72,25 @@ public class AddFilial extends AppCompatActivity {
 
                 Call call = client.newCall(request);
                 Response response = call.execute();
-
-                System.out.println("response-> " + response.body().string());
+                System.out.println("responseee -> " + response.body().string());
 
                 final ResponseBody responseBody = response.body();
-                if (responseBody != null) {
+                if ( responseBody != null ) {
                     responseBody.close();
                 }
 
-                if ( !response.isSuccessful()){
-                    System.out.println("FAILL-> ");
+
+                if ( !response.isSuccessful() ) {
+                    System.out.println("responseee -> " );
                     throw new IOException("http response is not successful");
                 } else {
-                    System.out.println("SUCESS-> ");
+                    System.out.println("responseee -> " );
                 }
 
-            } catch (Exception e) {
-                Log.e("testeSoftSul:::", e + " ListFiliais->onCreate()");
+                Intent intent = new Intent(this, HomeScreen.class);
+                startActivity(intent);
+            } catch ( Exception e ) {
+                Log.e("testeSoftSul:::", e + " AddFilial->onCreate()");
             }
         });
     }

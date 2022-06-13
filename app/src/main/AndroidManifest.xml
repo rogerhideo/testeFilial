@@ -12,37 +12,36 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TesteSoftSul"
         android:usesCleartextTraffic="true">
-        <activity android:name=".HttpClient"></activity>
         <activity
-            android:name=".views.CreateUser"
-            android:parentActivityName=".MainActivity">
+            android:name=".views.filial.DetailsFilial"
+            android:parentActivityName=".views.filial.ListFiliais">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".views.filial.ListFiliais" />
         </activity>
         <activity
-            android:name=".views.EditFilial"
-            android:parentActivityName=".views.DetailsFilial">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.DetailsFilial" />
-        </activity>
-        <activity
-            android:name=".views.DetailsFilial"
-            android:parentActivityName=".views.ListFiliais">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.ListFiliais" />
-        </activity>
-        <activity
-            android:name=".views.ListFiliais"
+            android:name=".views.filial.ListFiliais"
             android:parentActivityName=".views.HomeScreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.HomeScreen" />
         </activity>
         <activity
-            android:name=".views.AddFilial"
+            android:name=".views.user.CreateUser"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".views.filial.EditFilial"
+            android:parentActivityName=".views.filial.DetailsFilial">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.filial.DetailsFilial" />
+        </activity>
+        <activity
+            android:name=".views.filial.AddFilial"
             android:parentActivityName=".views.HomeScreen">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

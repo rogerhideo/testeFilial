@@ -1,4 +1,4 @@
-package com.example.testesoftsul.views;
+package com.example.testesoftsul.views.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.testesoftsul.MainActivity;
 import com.example.testesoftsul.R;
+import com.example.testesoftsul.config.AppConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,34 +32,34 @@ import static okhttp3.RequestBody.create;
 public class CreateUser extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
     }
 
 
-    public void onClickCria(View view) throws JSONException, IOException {
-
+    public void onClickCriar( View view ) {
         Executor myExecutor = Executors.newSingleThreadExecutor();
         myExecutor.execute(() -> {
             try {
-                System.out.println("onClickCria -> ");
-
                 EditText nomeView = findViewById(R.id.nome);
                 EditText emailView = findViewById(R.id.email);
                 EditText senhaView = findViewById(R.id.senha);
 
                 JSONObject jsonObject = new JSONObject();
-                jsonObject.put("nome", nomeView.getText());
+                jsonObject.put("name", nomeView.getText());
                 jsonObject.put("email", emailView.getText());
-                jsonObject.put("senha", senhaView.getText());
+                jsonObject.put("password", senhaView.getText());
 
                 RequestBody body = create(
                         MediaType.get("application/json; charset=utf-8"),
                         jsonObject.toString()
                 );
+
+                String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getCreateUserEndPoint();
+
                 Request request = new Request.Builder()
-                        .url("http://192.168.100.76:3000/mobile/v2/abastecimentos/1")
+                        .url(endPoint)
                         .post(body)
                         .addHeader("Accept-Encoding", "gzip")
                         .build();
@@ -68,23 +70,24 @@ public class CreateUser extends AppCompatActivity {
 
                 Call call = client.newCall(request);
                 Response response = call.execute();
-
-                System.out.println("response-> " + response.body().string());
+                System.out.println(" createUSer responseee -> " + response.body().string());
 
                 final ResponseBody responseBody = response.body();
                 if (responseBody != null) {
                     responseBody.close();
                 }
 
-                if ( !response.isSuccessful()){
-                    System.out.println("FAILL-> ");
+                if ( !response.isSuccessful() ){
+                    System.out.println("createUSer  FAILUREE-> " );
                     throw new IOException("http response is not successful");
                 } else {
-                    System.out.println("SUCESS-> ");
+                    System.out.println("createUSer SUCESS -> " );
                 }
 
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
             } catch (Exception e) {
-                Log.e("testeSoftSul:::", e + " ListFiliais->onCreate()");
+                Log.e("testeSoftSul:::", e + " CreateUser->onClickCriar()");
             }
         });
     }
