@@ -108,6 +108,7 @@ public class DetailsFilial extends AppCompatActivity {
                     String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getDeleteFilialEndPoint() + selectedFilial.getId();
                     String accesToken = "Bearer " + AppConfig.getAccessToken(getApplicationContext());
 
+                    // ##### requisição para deletar filial //
                     Request request = new Request.Builder()
                             .url(endPoint)
                             .delete()
@@ -149,8 +150,26 @@ public class DetailsFilial extends AppCompatActivity {
                     }
                     ListFiliais.setFiliaisList(auxArray);
 
+                    // ##### requisição para pegar lista de filiais //
+                    endPoint = AppConfig.getServerHost() + "/" + AppConfig.getGetFiliaisEndPoint() + "1";
+                    request = new Request.Builder()
+                            .url(endPoint)
+                            .get()
+                            .addHeader("Accept-Encoding", "gzip")
+                            .build();
+
+                    call = client.newCall(request);
+                    response = call.execute();
+                    String jsonData = response.body().string();
+
+                    if ( !response.isSuccessful() ) {
+                        throw new IOException("http response to getFiliais is not successful");
+                    }
+
                     Intent intent = new Intent(this, ListFiliais.class);
+                    intent.putExtra(MainActivity.DATA, jsonData);
                     startActivity(intent);
+
                     Looper.loop();
                 } catch (Exception e) {
                     Log.e("testeFilial:::", e + " DetailsFilial.myExecutor.execute(()");

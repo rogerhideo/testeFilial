@@ -14,9 +14,7 @@ import android.widget.Toast;
 import com.example.testefilial.MainActivity;
 import com.example.testefilial.R;
 import com.example.testefilial.config.AppConfig;
-import com.example.testefilial.views.HomeScreen;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -69,6 +67,7 @@ public class AddFilial extends AppCompatActivity {
                 jsonObject.put("longitude", longitude);
                 jsonObject.put("user_id", AppConfig.getUserId(getApplicationContext()));
 
+                // ##### requisição para adicionar filial ##### //
                 RequestBody body = create(
                         MediaType.get("application/json; charset=utf-8"),
                         jsonObject.toString()
@@ -102,14 +101,31 @@ public class AddFilial extends AppCompatActivity {
                     CharSequence text = "Falha ao criar Filial!";
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    throw new IOException("http response is not successful");
+                    throw new IOException("http to createFilial response is not successful");
                 } else {
                     CharSequence text = "Filial criada com sucesso!";
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show() ;
                 }
 
-                Intent intent = new Intent(this, HomeScreen.class);
+                // ##### requisição para deletar filial ##### //
+                endPoint = AppConfig.getServerHost() + "/" + AppConfig.getGetFiliaisEndPoint() + "1";
+                request = new Request.Builder()
+                        .url(endPoint)
+                        .get()
+                        .addHeader("Accept-Encoding", "gzip")
+                        .build();
+
+                call = client.newCall(request);
+                response = call.execute();
+                String jsonData = response.body().string();
+
+                if ( !response.isSuccessful() ) {
+                    throw new IOException("http response to getFiliais is not successful");
+                }
+
+                Intent intent = new Intent(this, ListFiliais.class);
+                intent.putExtra(MainActivity.DATA, jsonData);
                 startActivity(intent);
                 Looper.loop();
             } catch ( Exception e ) {

@@ -96,6 +96,11 @@ public class ListFiliais extends AppCompatActivity {
                     );
                     filiaisList.add(newFilial);
                 }
+                if ( filiaisList.size() == 0 ) {
+                    Filial newFilial = new Filial(-1,
+                           "Sem filiais Cadastradas!", "Clique em +", null, null);
+                    filiaisList.add(newFilial);
+                }
             } else {
                 updateData();
             }
@@ -122,9 +127,11 @@ public class ListFiliais extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                     try {
                         Filial selectFilial = (Filial) (listView.getItemAtPosition(position));
-                        Intent showDetail = new Intent(getApplicationContext(), DetailsFilial.class);
-                        showDetail.putExtra("id", String.valueOf(selectFilial.getId()));
-                        startActivity(showDetail);
+                        if ( selectFilial.getId() != -1 ) {
+                            Intent showDetail = new Intent(getApplicationContext(), DetailsFilial.class);
+                            showDetail.putExtra("id", String.valueOf(selectFilial.getId()));
+                            startActivity(showDetail);
+                        }
                     } catch ( Exception e ) {
                         Log.e("testeFilial:::" , e + "ListFiliais->onItemClick()");
                     }
@@ -171,6 +178,11 @@ public class ListFiliais extends AppCompatActivity {
                             );
                             filiaisList.add(newFilial);
                         }
+                        if ( filiaisList.size() == 0 ) {
+                            Filial newFilial = new Filial(-1,
+                                    "Sem filiais Cadastradas!", "Clique em +", null, null);
+                            filiaisList.add(newFilial);
+                        }
                     } else {
                         throw new IOException("http response is not successful");
                     }
@@ -194,5 +206,14 @@ public class ListFiliais extends AppCompatActivity {
     }
     public static void setFiliaisList(  ArrayList<Filial>  newList ) {
         filiaisList = newList;
+    }
+
+    public void onClickCadastrar( View view ) {
+        try {
+            Intent intent = new Intent(this, AddFilial.class);
+            startActivity(intent);
+        } catch ( Exception e ) {
+            Log.e("testeFilial:::" , "ListFiliais.onClickCadastrar()");
+        }
     }
 }

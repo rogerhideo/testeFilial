@@ -8,17 +8,36 @@
     android:orientation="vertical"
     tools:context=".views.filial.ListFiliais">
 
-    <SearchView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/filialListSearchView"
-        android:iconifiedByDefault="false"
-        android:queryHint="Pesquise Nome da Filial"/>
+        android:id="@+id/socialicons"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+        <SearchView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:id="@+id/filialListSearchView"
+            android:paddingVertical="20dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Pesquise Nome da Filial"/>
+
+        <Button
+            android:id="@+id/createFilialButton"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="40dp"
+            android:padding="10dp"
+            android:onClick="onClickCadastrar"
+            android:drawableLeft="@drawable/ic_baseline_add_to_photos_24" />
+    </LinearLayout>
+
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:id="@+id/filialListView"/>
-
 </LinearLayout>

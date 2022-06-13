@@ -12,15 +12,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.testefilial.config.AppConfig;
-import com.example.testefilial.models.Filial;
+import com.example.testefilial.views.filial.ListFiliais;
 import com.example.testefilial.views.user.CreateUser;
-import com.example.testefilial.views.HomeScreen;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -60,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     Looper.prepare();
 
+                    // ##### requisição de login //
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("email", emailView.getText().toString());
                     jsonObject.put("password", passwordView.getText().toString());
@@ -83,53 +81,68 @@ public class MainActivity extends AppCompatActivity {
                     Call call = client.newCall(request);
                     Response response = call.execute();
 
-                    String jsonData = response.body().string();
-
-                    JSONObject jsonResponse = new JSONObject(jsonData);
-                    JSONObject object = jsonResponse.getJSONObject("data");
-
-                    AppConfig.setAccessToken(object.getString("token"), getApplicationContext());
-                    AppConfig.setUserId(String.valueOf(object.getInt("userId")), getApplicationContext());
-
-                    final ResponseBody responseBody = response.body();
-                    if (responseBody != null) {
-                        responseBody.close();
-                    }
-
-
                     Context context = getApplicationContext();
                     int duration = Toast.LENGTH_SHORT;
                     if ( !response.isSuccessful()){
                         CharSequence text = "Falha ao logar!";
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-                        throw new IOException("http response is not successful");
+                        throw new IOException("http login response is not successful");
                     } else {
+                        String jsonData = response.body().string();
+                        JSONObject jsonResponse = new JSONObject(jsonData);
+                        JSONObject object = jsonResponse.getJSONObject("data");
+
+                        AppConfig.setAccessToken(object.getString("token"), getApplicationContext());
+                        AppConfig.setUserId(String.valueOf(object.getInt("userId")), getApplicationContext());
+
                         CharSequence text = "Login com sucesso!";
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
+
+                        // ##### requisição para pegar lista de filiais //
+                        endPoint = AppConfig.getServerHost() + "/" + AppConfig.getGetFiliaisEndPoint() + "1";
+
+                        request = new Request.Builder()
+                                .url(endPoint)
+                                .get()
+                                .addHeader("Accept-Encoding", "gzip")
+                                .build();
+
+                        call = client.newCall(request);
+                        Response response2 = call.execute();
+
+                        jsonData = response2.body().string();
+                        final ResponseBody responseBody2 = response2.body();
+                        if (responseBody2 != null) {
+                            responseBody2.close();
+                        }
+
+                        if ( !response.isSuccessful()){
+                            text = "Falha ao carregar Filiais!";
+                            toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                            throw new IOException("http getFiliais response is not successful");
+                        }
+
+                        Intent intent = new Intent(this, ListFiliais.class);
+                        intent.putExtra(MainActivity.DATA, jsonData);
+                        startActivity(intent);
                     }
 
-                    Intent intent = new Intent(this, HomeScreen.class);
-                    startActivity(intent);
+                    final ResponseBody responseBody = response.body();
+                    if (responseBody != null) {
+                        responseBody.close();
+                    }
+
                     Looper.loop();
                 } catch (Exception e) {
-                    Context context = getApplicationContext();
-                    int duration = Toast.LENGTH_SHORT;
-                    CharSequence text = "login ou senha incorretos!";
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                     Log.e("testeFilial:::", e + " MainActivity.myExecutor.execute(()");
                 }
             });
         } catch (Exception e) {
             Log.e("testeFilial:::" , "MainActivity.redirectToActivity()");
         }
-    }
-
-    public void sendMessage( View view ) {
-            Intent intent = new Intent(this, HomeScreen.class);
-            startActivity(intent);
     }
 
     public void createUser( View view ) {

@@ -19,13 +19,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.filial.ListFiliais" />
         </activity>
-        <activity
-            android:name=".views.filial.ListFiliais"
-            android:parentActivityName=".views.HomeScreen">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.HomeScreen" />
-        </activity>
+
+        <activity android:name=".views.filial.ListFiliais"></activity>
+
         <activity
             android:name=".views.user.CreateUser"
             android:parentActivityName=".MainActivity">
@@ -33,6 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".views.filial.EditFilial"
             android:parentActivityName=".views.filial.DetailsFilial">
@@ -40,18 +37,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".views.filial.DetailsFilial" />
         </activity>
+
         <activity
             android:name=".views.filial.AddFilial"
-            android:parentActivityName=".views.HomeScreen">
+            android:parentActivityName=".views.filial.ListFiliais">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.HomeScreen" />
+                android:value=".views.filial.ListFiliais" />
         </activity>
-        <activity android:name=".views.HomeScreen"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
