@@ -2,17 +2,31 @@ package com.example.testesoftsul.views.filial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.testesoftsul.MainActivity;
 import com.example.testesoftsul.R;
+import com.example.testesoftsul.config.AppConfig;
 import com.example.testesoftsul.models.Filial;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class DetailsFilial extends AppCompatActivity {
     private static Filial selectedFilial;
@@ -87,7 +101,59 @@ public class DetailsFilial extends AppCompatActivity {
 
     public void delete( View view ) {
         try {
-            System.out.println("[delete]");
+            Executor myExecutor = Executors.newSingleThreadExecutor();
+            myExecutor.execute(() -> {
+                try {
+                    Looper.prepare();
+                    String endPoint = AppConfig.getServerHost() + "/" + AppConfig.getDeleteFilialEndPoint() + selectedFilial.getId();
+
+                    Request request = new Request.Builder()
+                            .url(endPoint)
+                            .delete()
+                            .addHeader("Accept-Encoding", "gzip")
+                            .build();
+
+                    OkHttpClient client = new OkHttpClient.Builder()
+                            .cache(null)
+                            .build();
+
+                    Call call = client.newCall(request);
+                    Response response = call.execute();
+
+                    final ResponseBody responseBody = response.body();
+                    if (responseBody != null) {
+                        responseBody.close();
+                    }
+
+                    Context context = getApplicationContext();
+                    int duration = Toast.LENGTH_SHORT;
+                    if ( !response.isSuccessful()){
+                        CharSequence text = "Falha ao deletar Filial!";
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        throw new IOException("http response is not successful");
+                    } else {
+                        CharSequence text = "Filial Deletada com Sucesso!";
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+
+                    ArrayList<Filial> filiaisList = ListFiliais.getFiliaisList();
+                    ArrayList<Filial> auxArray = new ArrayList<Filial>();
+                    for( int i = 0; i < filiaisList.size(); i++ ) {
+                        if ( selectedFilial.getId() != filiaisList.get(i).getId() ) {
+                            auxArray.add(filiaisList.get(i));
+                        }
+                    }
+                    ListFiliais.setFiliaisList(auxArray);
+
+                    Intent intent = new Intent(this, ListFiliais.class);
+                    startActivity(intent);
+                    Looper.loop();
+                } catch (Exception e) {
+                    Log.e("testeSoftSul:::", e + " DetailsFilial.myExecutor.execute(()");
+                }
+            });
         } catch ( Exception e ) {
             Log.e("testeSoftSutl::", e + " DetailsFilial.delete()");
         }
