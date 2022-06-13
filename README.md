@@ -1,5 +1,5 @@
 # testeFilial
- 
+
  Esse projeto está configurado pra trabalhar em conjunto com o servidor do projeto no link a seguir:
 https://github.com/rogerhideo/laravelTesteFilial
 

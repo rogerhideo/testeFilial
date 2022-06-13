@@ -1,4 +1,4 @@
-package com.example.testesoftsul.views;
+package com.example.testefilial.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.testesoftsul.MainActivity;
-import com.example.testesoftsul.R;
-import com.example.testesoftsul.config.AppConfig;
-import com.example.testesoftsul.views.filial.AddFilial;
-import com.example.testesoftsul.views.filial.ListFiliais;
+import com.example.testefilial.MainActivity;
+import com.example.testefilial.R;
+import com.example.testefilial.config.AppConfig;
+import com.example.testefilial.views.filial.AddFilial;
+import com.example.testefilial.views.filial.ListFiliais;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,7 +44,7 @@ public class HomeScreen extends AppCompatActivity {
                     break;
             }
         } catch ( Exception e ) {
-            Log.e("testeSoftSul:::" , "HomeScreen->filterActivity()");
+            Log.e("testeFilial:::" , "HomeScreen->filterActivity()");
         }
     }
 
@@ -83,11 +83,11 @@ public class HomeScreen extends AppCompatActivity {
                     intent.putExtra(MainActivity.DATA, jsonData);
                     startActivity(intent);
                 } catch (Exception e) {
-                    Log.e("testeSoftSul:::", e + " HomeScreen->myExecutor.execute(()");
+                    Log.e("testeFilial:::", e + " HomeScreen->myExecutor.execute(()");
                 }
             });
         } catch (Exception e) {
-            Log.e("testeSoftSul:::" , "HomeScreen->redirectToActivity()");
+            Log.e("testeFilial:::" , "HomeScreen->redirectToActivity()");
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.testesoftsul;
+package com.example.testefilial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.testesoftsul.config.AppConfig;
-import com.example.testesoftsul.models.Filial;
-import com.example.testesoftsul.views.user.CreateUser;
-import com.example.testesoftsul.views.HomeScreen;
+import com.example.testefilial.config.AppConfig;
+import com.example.testefilial.models.Filial;
+import com.example.testefilial.views.user.CreateUser;
+import com.example.testefilial.views.HomeScreen;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,7 +35,7 @@ import okhttp3.ResponseBody;
 import static okhttp3.RequestBody.create;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String DATA = "com.example.testesoftsul.DATA";
+    public static final String DATA = "com.example.testefilial.DATA";
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -119,11 +119,11 @@ public class MainActivity extends AppCompatActivity {
                     CharSequence text = "login ou senha incorretos!";
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    Log.e("testeSoftSul:::", e + " MainActivity.myExecutor.execute(()");
+                    Log.e("testeFilial:::", e + " MainActivity.myExecutor.execute(()");
                 }
             });
         } catch (Exception e) {
-            Log.e("testeSoftSul:::" , "MainActivity.redirectToActivity()");
+            Log.e("testeFilial:::" , "MainActivity.redirectToActivity()");
         }
     }
 

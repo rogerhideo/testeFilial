@@ -1,4 +1,4 @@
-package com.example.testesoftsul.components;
+package com.example.testefilial.components;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.testesoftsul.R;
-import com.example.testesoftsul.models.Filial;
+import com.example.testefilial.R;
+import com.example.testefilial.models.Filial;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class FilialAdapter extends ArrayAdapter<Filial>  {
             nome.setText(filial.getNome());
             cidade.setText(filial.getCidade());
         } catch (Exception e) {
-            Log.e("testeSoftSul::", e + " FilialAdapter.getView()");
+            Log.e("testeFilial::", e + " FilialAdapter.getView()");
         }
         return convertView;
     }

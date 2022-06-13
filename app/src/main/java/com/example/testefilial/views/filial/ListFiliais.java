@@ -1,4 +1,4 @@
-package com.example.testesoftsul.views.filial;
+package com.example.testefilial.views.filial;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -9,11 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.example.testesoftsul.MainActivity;
-import com.example.testesoftsul.R;
-import com.example.testesoftsul.components.FilialAdapter;
-import com.example.testesoftsul.config.AppConfig;
-import com.example.testesoftsul.models.Filial;
+import com.example.testefilial.MainActivity;
+import com.example.testefilial.R;
+import com.example.testefilial.components.FilialAdapter;
+import com.example.testefilial.config.AppConfig;
+import com.example.testefilial.models.Filial;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -73,7 +73,7 @@ public class ListFiliais extends AppCompatActivity {
             });
 
         } catch (Exception e) {
-            Log.e("testeSoftSul:::" , e + "ListFiliais->initSearchWidgets()");
+            Log.e("testeFilial:::" , e + "ListFiliais->initSearchWidgets()");
         }
     }
 
@@ -101,7 +101,7 @@ public class ListFiliais extends AppCompatActivity {
             }
             setUpList();
         } catch (Exception e) {
-            Log.e("testeSoftSul:::" , e + "ListFiliais->setupData()");
+            Log.e("testeFilial:::" , e + "ListFiliais->setupData()");
         }
     }
 
@@ -111,7 +111,7 @@ public class ListFiliais extends AppCompatActivity {
             FilialAdapter adapter = new FilialAdapter(getApplicationContext(), 0, filiaisList);
             listView.setAdapter(adapter);
         } catch ( Exception e ) {
-            Log.e("testeSoftSul:::" , e + " ListFiliais->setUpList()");
+            Log.e("testeFilial:::" , e + " ListFiliais->setUpList()");
         }
     }
 
@@ -126,12 +126,12 @@ public class ListFiliais extends AppCompatActivity {
                         showDetail.putExtra("id", String.valueOf(selectFilial.getId()));
                         startActivity(showDetail);
                     } catch ( Exception e ) {
-                        Log.e("testeSoftSul:::" , e + "ListFiliais->onItemClick()");
+                        Log.e("testeFilial:::" , e + "ListFiliais->onItemClick()");
                     }
                 }
             });
         } catch ( Exception e ) {
-            Log.e("testeSoftSul:::" , e + "ListFiliais->setUpOnclickListener()");
+            Log.e("testeFilial:::" , e + "ListFiliais->setUpOnclickListener()");
         }
     }
 
@@ -181,11 +181,11 @@ public class ListFiliais extends AppCompatActivity {
                     }
 
                 } catch (Exception e) {
-                    Log.e("testeSoftSul:::", e + " ListFiliais.myExecutor.execute()");
+                    Log.e("testeFilial:::", e + " ListFiliais.myExecutor.execute()");
                 }
             });
         } catch (Exception e) {
-            Log.e("testeSoftSul:::" , e + " ListFiliais.updateData()");
+            Log.e("testeFilial:::" , e + " ListFiliais.updateData()");
         }
     }
 

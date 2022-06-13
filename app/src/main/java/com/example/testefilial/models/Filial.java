@@ -1,4 +1,4 @@
-package com.example.testesoftsul.models;
+package com.example.testefilial.models;
 
 public class Filial
 {

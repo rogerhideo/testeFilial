@@ -1,4 +1,4 @@
-package com.example.testesoftsul.views.filial;
+package com.example.testefilial.views.filial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,9 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.testesoftsul.R;
-import com.example.testesoftsul.config.AppConfig;
-import com.example.testesoftsul.models.Filial;
+import com.example.testefilial.R;
+import com.example.testefilial.config.AppConfig;
+import com.example.testefilial.models.Filial;
 
 import org.json.JSONObject;
 
@@ -64,7 +64,7 @@ public class EditFilial extends AppCompatActivity {
             longitudeView.setText(selectedFilial.getLongitude());
 
         } catch ( Exception e ) {
-            Log.e("testeSoftSul::", e + " EditFilial.Oncreate()");
+            Log.e("testeFilial::", e + " EditFilial.Oncreate()");
         }
     }
 
@@ -159,11 +159,11 @@ public class EditFilial extends AppCompatActivity {
                 startActivity(showDetail);
                 Looper.loop();
             } catch (Exception e) {
-                Log.e("testeSoftSul:::", e + " EditFilial.myExecutor.execute(()");
+                Log.e("testeFilial:::", e + " EditFilial.myExecutor.execute(()");
             }
         });
         } catch (Exception e ){
-            Log.e("testeSoftSul:::", e + " EditFilial.onClickCriar()");
+            Log.e("testeFilial:::", e + " EditFilial.onClickCriar()");
         }
     }
 }
